@@ -1,0 +1,18 @@
+Project 3 for CS 420 Artificial Intelligence
+
+This program uses alpha-beta pruning to compete in the game Isolation.
+
+Isolation is played on a 8x8 chess-style board with 2 players.  The player who goes first starts in the upper left corner, 
+and the second player starts on the bottom left.  Each turn, a player can move anywhere in the 8 cardinal and diagonal directions.
+Players cannot land on or pass through spaces that are, or have been, occupied.  The player who is unable to make any moves 
+on their turn loses.
+
+This program uses iterative deepening to find the best rated move within a given time limit.  The state evaluation heuristic is
+the number of moves the program can make minus the number of moves the opponent has times 3.  The heuristic is applied to
+nodes below the target depth to sort them, increasing the efficiency of the AB pruning.  After every DFS, the results are used to
+sort the next search iteration.
+
+This program is optimized for speed.  The state of the board is represented by a 64 bit integer, which represents which spaces
+have been landed on, and 2 8 bit chars which hold the bit index of each player, reducing register pressure and stack operations.
+Moves are generated using fast bitwise logic, with no conditional logic or branches involved.  It can easily evaluate more than
+15 million nodes per second.
